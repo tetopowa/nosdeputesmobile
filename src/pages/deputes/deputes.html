@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let depute of deputesList">
+    <button ion-item *ngFor="let depute of deputesList" (click)="openDepute(depute)">
       <ion-avatar item-start>
         <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/60">
       </ion-avatar>
