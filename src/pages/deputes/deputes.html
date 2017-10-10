@@ -1,0 +1,25 @@
+<!--
+  Generated template for the DeputesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>deputes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let depute of deputesList">
+      <ion-avatar item-start>
+        <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/60">
+      </ion-avatar>
+      {{depute.depute.nom}}
+    </button>
+  </ion-list>
+</ion-content>
