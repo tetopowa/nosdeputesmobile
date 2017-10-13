@@ -7,13 +7,66 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>depute</ion-title>
+    <ion-title>Deputé</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content class="home" *ngIf="depute">
+    <ion-card>
+        <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/1024">
+        <ion-card-content>
+            <ion-card-title>
+                {{depute.depute.nom}}
+            </ion-card-title>
+            <p>
+                {{depute.depute.parti_ratt_financier}}
+            </p>
+        </ion-card-content>
+    </ion-card>
 
-<ion-content *ngIf="depute">
-  {{depute.depute.nom}}
-  twitter : {{depute.depute.twitter}}
+    <ion-card>
+      <ion-card-header>
+          Information personelles
+      </ion-card-header>
+        <ion-card-content>
+          Date de naissance : {{depute.depute.date_naissance}}<br/>
+          Lieu de naissance : {{depute.depute.lieu_naissance}}<br/>
+          Profession : {{depute.depute.profession}}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+          Mandat en cours
+      </ion-card-header>
+        <ion-card-content>
+          Département : {{depute.depute.nom_circo}}<br/>
+          Numéro circonscription : {{depute.depute.num_circo}}<br/>
+          Place dans l'hémicicle : {{depute.depute.place_en_hemicycle}}<br/>
+          Nombre de mandat : {{depute.depute.nb_mandats}}
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+        <ion-card-header>
+            Contacter votre député
+        </ion-card-header>
+        <ion-list>
+
+            <button ion-item>
+                <ion-icon name="twitter" ios="logo-twitter" md="logo-twitter" item-left></ion-icon>
+                <a class="plainText" href="twitter:{{depute.depute.twitter}}">{{depute.depute.twitter}}</a>
+            </button>
+
+            <button ion-item>
+                <ion-icon name="mail" ios="ios-mail" md="md-mail" item-left></ion-icon>
+                <a class="plainText" href="mailto:{{depute.depute.emails[0].email}}">{{depute.depute.emails[0].email}}</a>
+            </button>
+
+          </ion-list>
+      </ion-card>
+
+
 </ion-content>

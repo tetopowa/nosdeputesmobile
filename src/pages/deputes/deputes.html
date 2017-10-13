@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>deputes</ion-title>
+    <ion-title>Vos Deputés</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,6 +20,7 @@
         <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/60">
       </ion-avatar>
       {{depute.depute.nom}}
+      <p class="pull-right"><i>{{depute.depute.groupe_sigle}}</i></p>
     </button>
   </ion-list>
 </ion-content>
