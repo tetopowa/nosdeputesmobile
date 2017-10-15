@@ -25,7 +25,6 @@ export class DeputesPage {
   }
 
   openDepute(depute){
-    console.log("vate faire enculer martin");
     this.navCtrl.push('DeputePage', {
       depute: depute
     });

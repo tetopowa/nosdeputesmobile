@@ -17,8 +17,12 @@ export class DeputePage {
 
   depute: any;
 
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.depute = this.navParams.get('depute');
+
+
   }
 
   ionViewDidLoad() {
