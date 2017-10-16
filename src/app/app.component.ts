@@ -11,13 +11,13 @@ import { Settings } from '../providers/providers';
   template: `<ion-menu [content]="content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Pages</ion-title>
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <button menuClose ion-item *ngFor="let p of pagesNew" (click)="openPage(p)">
           {{p.title}}
         </button>
       </ion-list>
@@ -45,6 +45,12 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' },
     { title: 'Deputes', component: 'DeputesPage' },
     { title: 'Député', component: 'DeputePage' }
+  ]
+
+  pagesNew: any[] = [
+    { title: 'Rechercher votre député', component: 'SearchPage' },
+    { title: 'Liste des deputés', component: 'DeputesPage' },
+    { title: 'Paramètres', component: 'SettingsPage' }
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
