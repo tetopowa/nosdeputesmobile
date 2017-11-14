@@ -6,25 +6,23 @@
 -->
 
 
-
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>Nos Deputés</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let depute of deputesList" (click)="openDepute(depute)">
+  <!--<ion-searchbar (ionInput)="searchDepute($event)" placeholder="Rechercher Nom"></ion-searchbar>-->
+  <ion-searchbar (ionInput)="searchDepute($event)" placeholder="Rechercher par Nom, Prénom, Circonscription" style="font-size: 12px"></ion-searchbar>
+  <ion-list *ngIf="deputesList">
+    <button ion-item *ngFor="let depute of filteredDeputesList" (click)="openDepute(depute)">
       <ion-avatar item-start>
         <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/60">
       </ion-avatar>
       {{depute.depute.nom}}
-      <p class="pull-right"><i>{{depute.depute.groupe_sigle}}</i></p>
+      <p class="pull-right"><i>{{depute.depute.groupe_sigle}} - {{depute.depute.nom_circo}}</i></p>
     </button>
   </ion-list>
 </ion-content>

@@ -13,77 +13,103 @@
 </ion-header>
 
 <ion-content *ngIf="depute">
+  <ion-card>
+    <ion-item>
+      <ion-card-title style="font-size: 1.7rem">
+        {{depute.depute.nom}}
+      </ion-card-title>
+      <ion-avatar item-left>
+        <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/1024"
+             style="height: 100px; width: 100px;">
+      </ion-avatar>
+      <p>
+        <i>{{depute.depute.parti_ratt_financier}}<br></i>
+      </p>
+    </ion-item>
+  </ion-card>
 
+  <ion-card *ngIf="activite_last_month">
+    <ion-item>
+      <ion-card-title>
+        Activité de {{last_month | date:'MMMM'}} {{last_month.getFullYear()}}
+      </ion-card-title>
+      <ion-card-content>
+        <!--<canvas #last_activ_canvas ></canvas>-->
+        Amendements adoptés : {{activite_last_month.depute.amendements_adoptes}}<br>
+        Amendements proposés : {{activite_last_month.depute.amendements_proposes}}<br>
+        Amendements signés : {{activite_last_month.depute.amendements_signes}}<br>
+        Interventions en commission : {{activite_last_month.depute.commission_interventions}}<br>
+        Précences en commission: {{activite_last_month.depute.commission_presences}}<br>
+        Interventions en hémicycle : {{activite_last_month.depute.hemicycle_interventions}}<br>
+        Interventions courtes en hémicycle : {{activite_last_month.depute.hemicycle_interventions_courtes}}<br>
+        Propositions écrites : {{activite_last_month.depute.propositions_ecrites}}<br>
+        Propositions signées: {{activite_last_month.depute.propositions_signees}}<br>
+        Questions écrites: {{activite_last_month.depute.questions_ecrites}}<br>
+        Questions orales: {{activite_last_month.depute.questions_orales}}<br>
+        Propositions écrites : {{activite_last_month.depute.propositions_ecrites}}<br>
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
 
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-right>
-          <img src="https://www.nosdeputes.fr/depute/photo/{{depute.depute.slug}}/1024" style="height: 150px; width: 150px;">
-        </ion-avatar>
+  <ion-card >
+    <ion-item>
+      <ion-card-title>
+        Revenus député
+      </ion-card-title>
+      <ion-card-content *ngIf="remuneration_last_month">
+        <!--<div *ngFor="let t of test">{{t.descriptionMandat[0]}}</div>-->
+        <div *ngFor="let remu of remuneration_last_month.remuneration[0].montant[0].montant">{{remu.annee}} : {{remu.montant}} €</div>
+        <!--<canvas #last_remu_canvas></canvas>-->
+      </ion-card-content>
+      <ion-card-content *ngIf="!remuneration_last_month">
+        <!--<div *ngFor="let t of test">{{t.descriptionMandat[0]}}</div>-->
+        <i>Pas de revenus déclarés</i>
+        <i>possible BUG</i>
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
 
-        <ion-card-title>
-            {{depute.depute.nom}}
-        </ion-card-title>
-        <p>
-            {{depute.depute.parti_ratt_financier}}
-        </p>
-      </ion-item>
-    </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-card-title>
+        Information personnelles
+      </ion-card-title>
+      <ion-card-content>
+        <b>Date de naissance </b>: {{depute.depute.date_naissance}}<br/>
+        <b>Lieu de naissance </b>: {{depute.depute.lieu_naissance}}<br/>
+        <div *ngIf="depute.depute.profession == 0">
+          <b>Profession </b>: <i>Non renseigné</i>
+        </div>
+        <div *ngIf="depute.depute.profession != 0">
+          <b>Profession </b>: {{depute.depute.profession}}
+        </div>
+      </ion-card-content>
 
-    <ion-card>
-        <ion-item>
-          <ion-card-title>
-              Information personelles
-          </ion-card-title>
-          <ion-card-content>
-            Date de naissance : {{depute.depute.date_naissance}}<br/>
-            Lieu de naissance : {{depute.depute.lieu_naissance}}<br/>
-            Profession : {{depute.depute.profession}}
-          </ion-card-content>
-
-          <ion-card-title>
-              Mandat en cours
-          </ion-card-title>
-          <ion-card-content>
-            Département : {{depute.depute.nom_circo}}<br/>
-            Numéro circonscription : {{depute.depute.num_circo}}<br/>
-            Place dans l'hémicicle : {{depute.depute.place_en_hemicycle}}<br/>
-            Nombre de mandat : {{depute.depute.nb_mandats}}
-          </ion-card-content>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-          <ion-item>
-            <ion-card-title>
-                Activité sur les 12 derniers mois
-            </ion-card-title>
-            <ion-card-content>
-              https://www.nosdeputes.fr/synthese/data/json
-            </ion-card-content>
-          </ion-item>
-        </ion-card>
-
-
-        <ion-card>
-          <ion-item>
-            <ion-card-title>
-                Contacter votre député
-            </ion-card-title>
-            <ion-list>
-                <button ion-item>
-                    <ion-icon name="twitter" ios="logo-twitter" md="logo-twitter" item-left></ion-icon>
-                    <a class="plainText" href="twitter:{{depute.depute.twitter}}">{{depute.depute.twitter}}</a>
-                </button>
-
-                <button ion-item>
-                    <ion-icon name="mail" ios="ios-mail" md="md-mail" item-left></ion-icon>
-                    <a class="plainText" href="mailto:{{depute.depute.emails[0].email}}">{{depute.depute.emails[0].email}}</a>
-                </button>
-
-              </ion-list>
-          </ion-item>
-        </ion-card>
+      <ion-card-title>
+        Mandat en cours
+      </ion-card-title>
+      <ion-card-content>
+        <b>Département </b>: {{depute.depute.nom_circo}}<br/>
+        <b>Numéro circonscription </b>: {{depute.depute.num_circo}}<br/>
+        <b>Place dans l'hémicicle </b>: {{depute.depute.place_en_hemicycle}}<br/>
+        <b>Nombre de mandat </b>: {{depute.depute.nb_mandats}}<br/>
+        <b>Début du mandat actuel</b> : {{depute.depute.mandat_debut}}
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-card-title>
+        Contacter votre député
+      </ion-card-title>
+      <ion-list>
+        <button ion-item>
+          <ion-icon name="twitter" ios="logo-twitter" md="logo-twitter" item-left></ion-icon>
+          <a class="plainText" href="twitter:{{depute.depute.twitter}}">{{depute.depute.twitter}}</a>
+        </button>
+      </ion-list>
+    </ion-item>
+  </ion-card>
 
 
 </ion-content>
